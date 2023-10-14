@@ -1,0 +1,230 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/new-people": {
+            "post": {
+                "tags": [
+                    "People"
+                ],
+                "summary": "Crée une nouvelle personne",
+                "operationId": "d7068c031397ddae75a22140c77a07c1",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "firstname": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "lastname": {
+                                        "type": "string",
+                                        "example": "Doe"
+                                    },
+                                    "birthdate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2000-05-27"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "La personne a été créée avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 201
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Succès ! Personne créée"
+                                        },
+                                        "people": {
+                                            "$ref": "#/components/schemas/People"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Mauvaise requête",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 400
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Mauvaise requête. Veuillez respecter ce format : 'Y-m-d'. Example : '2000-05-27'"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/add-job-people": {
+            "post": {
+                "tags": [
+                    "People"
+                ],
+                "summary": "Add job to a people",
+                "operationId": "db122e7ee0cb94f24ac031c9942afc62",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "companyName": {
+                                        "type": "string"
+                                    },
+                                    "position": {
+                                        "type": "string"
+                                    },
+                                    "startDate": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "endDate": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "peopleUuid": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Job have been created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 201
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Success : New job created !"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Mauvaise requête",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 400
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad request. Please respect this format : 'Y-m-d'. Example : '2000-05-27'"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/peoples": {
+            "get": {
+                "tags": [
+                    "People"
+                ],
+                "summary": "Récupérer la liste des personnes",
+                "operationId": "1067c8a2823e49d0a70a874b74d1d333",
+                "responses": {
+                    "200": {
+                        "description": "Liste des personnes récupérée avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/People"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/company-members/{companyName}": {
+            "get": {
+                "tags": [
+                    "People"
+                ],
+                "summary": "Recover company members",
+                "operationId": "cd2c5f5e44b060f4841a5ef84010f128",
+                "parameters": [
+                    {
+                        "name": "companyName",
+                        "in": "path",
+                        "description": "Nom de l'entreprise",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of company members successfully recovered",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "companyName": {
+                                            "type": "string"
+                                        },
+                                        "employees": {
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
