@@ -17,5 +17,7 @@
 7. Start the Symfony application :
     - `symfony server:start`
 8. Now, the Symfony web server should be ready. Go to http://localhost:8000/ (the port may be different)
+9. Access to the documentation :
+   - http://localhost:8000/swagger.html
 
 *Requirements : Symfony 5.4.x, Composer 2.x, PHP 8.x and a MySQL database*
